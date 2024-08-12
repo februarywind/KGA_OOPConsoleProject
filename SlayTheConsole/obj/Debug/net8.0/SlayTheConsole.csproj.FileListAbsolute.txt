@@ -1,0 +1,14 @@
+C:\Users\rnjsalsrb\GitHub\KGA_OOPConsoleProject\SlayTheConsole\bin\Debug\net8.0\SlayTheConsole.exe
+C:\Users\rnjsalsrb\GitHub\KGA_OOPConsoleProject\SlayTheConsole\bin\Debug\net8.0\SlayTheConsole.deps.json
+C:\Users\rnjsalsrb\GitHub\KGA_OOPConsoleProject\SlayTheConsole\bin\Debug\net8.0\SlayTheConsole.runtimeconfig.json
+C:\Users\rnjsalsrb\GitHub\KGA_OOPConsoleProject\SlayTheConsole\bin\Debug\net8.0\SlayTheConsole.dll
+C:\Users\rnjsalsrb\GitHub\KGA_OOPConsoleProject\SlayTheConsole\bin\Debug\net8.0\SlayTheConsole.pdb
+C:\Users\rnjsalsrb\GitHub\KGA_OOPConsoleProject\SlayTheConsole\obj\Debug\net8.0\SlayTheConsole.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rnjsalsrb\GitHub\KGA_OOPConsoleProject\SlayTheConsole\obj\Debug\net8.0\SlayTheConsole.AssemblyInfoInputs.cache
+C:\Users\rnjsalsrb\GitHub\KGA_OOPConsoleProject\SlayTheConsole\obj\Debug\net8.0\SlayTheConsole.AssemblyInfo.cs
+C:\Users\rnjsalsrb\GitHub\KGA_OOPConsoleProject\SlayTheConsole\obj\Debug\net8.0\SlayTheConsole.csproj.CoreCompileInputs.cache
+C:\Users\rnjsalsrb\GitHub\KGA_OOPConsoleProject\SlayTheConsole\obj\Debug\net8.0\SlayTheConsole.dll
+C:\Users\rnjsalsrb\GitHub\KGA_OOPConsoleProject\SlayTheConsole\obj\Debug\net8.0\refint\SlayTheConsole.dll
+C:\Users\rnjsalsrb\GitHub\KGA_OOPConsoleProject\SlayTheConsole\obj\Debug\net8.0\SlayTheConsole.pdb
+C:\Users\rnjsalsrb\GitHub\KGA_OOPConsoleProject\SlayTheConsole\obj\Debug\net8.0\SlayTheConsole.genruntimeconfig.cache
+C:\Users\rnjsalsrb\GitHub\KGA_OOPConsoleProject\SlayTheConsole\obj\Debug\net8.0\ref\SlayTheConsole.dll
