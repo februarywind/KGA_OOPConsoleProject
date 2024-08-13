@@ -30,7 +30,7 @@ namespace SlayTheConsole.Scenes
                 Console.SetCursorPosition(setCursor[i], 6);
                 Console.WriteLine($"체력 : {monsters[i].hp}/{monsters[i].maxHp}");
                 Console.SetCursorPosition(setCursor[i], 7);
-                Console.WriteLine($"행동: {monsters[i].action[0]}");
+                Console.WriteLine($"행동: {monsters[i].action[0].name}");
                 Console.SetCursorPosition(setCursor[i], 8);
                 Console.WriteLine("상태: 기본");
             }
@@ -106,29 +106,29 @@ namespace SlayTheConsole.Scenes
         public void PlayerTurn()
         {
             game.player.UseMp(-(game.player.maxMp - game.player.mp));
+            game.player.SetDp(-game.player.dp);
             Draw(5);
         }
         public void PlayerTurnEnd()
         {
             usedSkill.AddRange(holdingSkill);
             holdingSkill.Clear();
-            PlayerTurn();
+            MonsterTurn();
         }
         public void MonsterTurn()
         {
-            Draw(5);
+            foreach (var item in monsters)
+            {
+                item.action[0].Action(item, game.player);
+            }
+            PlayerTurn();
         }
 
         public void UseSkill(int n)
         {
-
             int input = 1;
-            if (!holdingSkill[n - 1].Action(monsters[0 + input - 1], game.player))
-                return;
 
-            Game.ClearLine(24);
-            Game.ClearLine(25);
-            Game.ClearLine(26);
+            Game.ClearLine(24, 3);
             if (holdingSkill[n - 1].atackType)
             {
                 do
@@ -138,8 +138,15 @@ namespace SlayTheConsole.Scenes
                     input = Console.ReadKey().KeyChar - '0';
                 } while (input < 1 || input > monsters.Count);
             }
-            usedSkill.Add(holdingSkill[n - 1]);
-            holdingSkill.RemoveAt(n - 1);
+            if (holdingSkill[n - 1].Action(monsters[0 + input - 1], game.player))
+            {
+                usedSkill.Add(holdingSkill[n - 1]);
+                holdingSkill.RemoveAt(n - 1);
+            }
+            if (monsters[0 + input - 1].hp <= 0)
+            {
+                monsters.Remove(monsters[0 + input - 1]);
+            }
 
         }
     }

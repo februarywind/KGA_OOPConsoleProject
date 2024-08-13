@@ -73,10 +73,13 @@ namespace SlayTheConsole
         {
             curScene.Update();
         }
-        public static void ClearLine(int n)
+        public static void ClearLine(int y, int value)
         {
-            Console.SetCursorPosition(0, n);
-            Console.WriteLine($"{"", 120}");
+            for (int i = 0; i < value; i++)
+            {
+                Console.SetCursorPosition(0, y + i);
+                Console.WriteLine($"{"",120}");
+            }
         }
     }
 }

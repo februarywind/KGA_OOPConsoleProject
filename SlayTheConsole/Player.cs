@@ -12,6 +12,16 @@
 
         public void Hit(int damage)
         {
+            if (dp >= damage)
+            {
+                dp -= damage;
+                damage = 0;
+            }
+            else
+            {
+                damage -= dp;
+                dp = 0;
+            }
             hp -= damage;
         }
 
