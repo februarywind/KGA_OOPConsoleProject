@@ -16,7 +16,6 @@ namespace SlayTheConsole
         private Scene[] scenes;
         private Scene curScene;
         public Player player { get; } = new Player();
-        public Monsters monsters { get; } = new Monsters();
 
         public void Run()
         {
@@ -44,6 +43,7 @@ namespace SlayTheConsole
 
         private void Start()
         {
+            Console.CursorVisible = false;
             isRunning = true;
 
             scenes = new Scene[(int)SceneType.Size];
@@ -72,6 +72,11 @@ namespace SlayTheConsole
         private void Update()
         {
             curScene.Update();
+        }
+        public static void ClearLine(int n)
+        {
+            Console.SetCursorPosition(0, n);
+            Console.WriteLine($"{"", 120}");
         }
     }
 }

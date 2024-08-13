@@ -8,7 +8,7 @@
         public int maxMp { get; private set; } = 3;
         public int mp { get; private set; } = 3;
 
-        public List<Skill> skillList = new List<Skill>() {new Strike(), new Defend(), new Bash(), new Bash(), new Bash() };
+        public List<Skill> skillList = new List<Skill>() { new Strike(), new Strike(), new Strike(), new Strike(), new Strike(), new Defend(), new Defend(), new Defend(), new Defend(), new Bash() };
 
         public void Hit(int damage)
         {
@@ -18,6 +18,10 @@
         public void SetDp(int value)
         {
             dp += value;
+        }
+        public void UseMp(int value)
+        {
+            mp -= value;
         }
     }
 }
