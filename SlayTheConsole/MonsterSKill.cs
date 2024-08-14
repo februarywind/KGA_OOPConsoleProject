@@ -32,7 +32,7 @@ namespace SlayTheConsole
         public MonsterDefend() : base("방어") { }
         public override void Action(Monsters monster, Player player)
         {
-            monster.SetDp(monster.dp);
+            monster.SetDp(monster.setDp);
         }
     }
 }

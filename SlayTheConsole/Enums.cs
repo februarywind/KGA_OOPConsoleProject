@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SlayTheConsole
+﻿namespace SlayTheConsole
 {
-    public enum SceneType { Title, Battle , Size }
+    public enum SceneType { Title, Battle, Select, Size, }
 }

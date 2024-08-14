@@ -21,7 +21,7 @@ namespace SlayTheConsole
 
     public class Strike : Skill
     {
-        public Strike() : base("타격", "피해를 6 줍니다.", 1, true) { }
+        public Strike() : base("타격", "피해를 6(+ap) 줍니다.", 1, true) { }
         public override bool Action(Monsters monster, Player player)
         {
             player.UseMp(cost);
@@ -30,14 +30,14 @@ namespace SlayTheConsole
                 player.UseMp(-cost);
                 return false;
             }
-            monster.Hit(6);
+            monster.Hit(6 + player.ap);
             return true;
         }
     }
 
     public class Bash : Skill
     {
-        public Bash() : base("강타", "피해를 8 줍니다. 취약을 2 부여합니다.", 2, true) { }
+        public Bash() : base("강타", "피해를 8(+ap) 줍니다. 취약을 부여합니다.", 2, true) { }
         public override bool Action(Monsters monster, Player player)
         {
             player.UseMp(cost);
@@ -46,14 +46,15 @@ namespace SlayTheConsole
                 player.UseMp(-cost);
                 return false;
             }
-            monster.Hit(8);
+            monster.Hit(8 + player.ap);
+            monster.MonsterState();
             return true;
         }
     }
 
     public class Defend : Skill
     {
-        public Defend() : base("수비", "방어도를 5 얻습니다.", 1, false) { }
+        public Defend() : base("수비", "방어도를 5(+dp) 얻습니다.", 1, false) { }
         public override bool Action(Monsters monster, Player player)
         {
             player.UseMp(cost);
@@ -62,7 +63,53 @@ namespace SlayTheConsole
                 player.UseMp(-cost);
                 return false;
             }
-            player.SetDp(5);
+            player.SetDp(5 + player.upDp);
+            return true;
+        }
+    }
+    public class BodySlam : Skill
+    {
+        public BodySlam() : base("몸통 박치기", "현재 방어도 만큼의 피해를 줍니다.", 1, true) { }
+        public override bool Action(Monsters monster, Player player)
+        {
+            player.UseMp(cost);
+            if (player.mp < 0)
+            {
+                player.UseMp(-cost);
+                return false;
+            }
+            monster.Hit(player.dp + player.ap);
+            return true;
+        }
+    }
+    public class HeavyBlade : Skill
+    {
+        public HeavyBlade() : base("대검", "피해를 14(+ap * 3) 줍니다.", 2, true) { }
+        public override bool Action(Monsters monster, Player player)
+        {
+            player.UseMp(cost);
+            if (player.mp < 0)
+            {
+                player.UseMp(-cost);
+                return false;
+            }
+            monster.Hit(14 + player.ap * 3);
+            return true;
+        }
+    }
+    public class IronWave : Skill
+    {
+        public IronWave() : base("철의 파동", "방어도를 5(+dp) 얻습니다. 피해를 5(+ap) 줍니다.", 1, true) { }
+        public override bool Action(Monsters monster, Player player)
+        {
+            player.UseMp(cost);
+            if (player.mp < 0)
+            {
+                player.UseMp(-cost);
+                return false;
+            }
+            monster.Hit(5 + player.ap);
+            player.SetDp(5 + player.upDp);
             return true;
         }
     }

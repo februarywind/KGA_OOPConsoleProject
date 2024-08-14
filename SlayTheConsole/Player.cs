@@ -4,7 +4,9 @@
     {
         public int maxHp { get; private set; } = 80;
         public int hp { get; private set; } = 80;
+        public int ap { get; private set; } = 0;
         public int dp { get; private set; } = 0;
+        public int upDp { get; private set; } = 0;
         public int maxMp { get; private set; } = 3;
         public int mp { get; private set; } = 3;
 
@@ -32,6 +34,19 @@
         public void UseMp(int value)
         {
             mp -= value;
+        }
+
+        public void TurnStart()
+        {
+            dp = 0;
+            mp = maxMp;
+        }
+
+        public void UpStat(int[] ints)
+        {
+            maxHp += ints[0];
+            ap += ints[1];
+            upDp += ints[2];
         }
     }
 }

@@ -9,14 +9,18 @@ namespace SlayTheConsole.Scenes
         Queue<Skill> drawSkill = new();
         List<Skill> holdingSkill = new();
         List<Skill> usedSkill = new();
+        Player Player = new();
+        int turn;
 
         public override void Enter()
         {
-            Console.WriteLine("1 스테이지");
-            monsters.Add(Monsters.GetMonster(0));
-            monsters.Add(Monsters.GetMonster(1));
+            Player = game.player;
+            //monsters.Add(Monsters.GetMonster(0));
+            //monsters.Add(Monsters.GetMonster(1));
+            monsters.Add(Monsters.GetMonster(2));
             Random random = new Random();
-            drawSkill = new Queue<Skill>(game.player.skillList.OrderBy(x => random.Next()).ToList());
+            drawSkill = new Queue<Skill>(Player.skillList.OrderBy(x => random.Next()).ToList());
+            turn = -1;
             PlayerTurn();
         }
         public override void Render()
@@ -28,16 +32,17 @@ namespace SlayTheConsole.Scenes
                 Console.SetCursorPosition(setCursor[i], 5);
                 Console.WriteLine(monsters[i].name);
                 Console.SetCursorPosition(setCursor[i], 6);
-                Console.WriteLine($"체력 : {monsters[i].hp}/{monsters[i].maxHp}");
+                Console.WriteLine($"체력 : {monsters[i].hp}/{monsters[i].maxHp} + {monsters[i].dp}");
                 Console.SetCursorPosition(setCursor[i], 7);
-                Console.WriteLine($"행동: {monsters[i].action[0].name}");
+                Console.WriteLine($"행동: {monsters[i].action[turn % monsters[i].action.Length].name} {((monsters[i].action[turn % monsters[i].action.Length].name == "공격") ? monsters[i].ap : monsters[i].setDp)}");
                 Console.SetCursorPosition(setCursor[i], 8);
-                Console.WriteLine("상태: 기본");
+                Console.WriteLine($"상태: {(monsters[i].state ? "취약":"기본")}");
             }
 
             // 플레이어 정보 출력
-            Console.SetCursorPosition(0, 20);
-            Console.WriteLine($"{$"체력 : {game.player.hp}/{game.player.maxHp}\t방어도 : {game.player.dp}\t행동력 : {game.player.mp}/{game.player.maxMp}",65}");
+            Console.SetCursorPosition(50, 19);
+            Console.WriteLine($"ap : {Player.ap}          dp : {Player.upDp}");
+            Console.WriteLine($"{$"체력 : {Player.hp}/{Player.maxHp}\t방어도 : {Player.dp}\t행동력 : {Player.mp}/{Player.maxMp}",65}");
 
             // 스킬 리스트 출력
             Console.SetCursorPosition(0, 22);
@@ -86,6 +91,12 @@ namespace SlayTheConsole.Scenes
         public override void Update()
         {
             Console.Clear();
+            if (monsters.Count == 0)
+            {
+                holdingSkill.Clear();
+                usedSkill.Clear();
+                game.ChangeScene(SceneType.Select);
+            }
         }
         public override void Exit() { }
 
@@ -105,8 +116,8 @@ namespace SlayTheConsole.Scenes
 
         public void PlayerTurn()
         {
-            game.player.UseMp(-(game.player.maxMp - game.player.mp));
-            game.player.SetDp(-game.player.dp);
+            turn++;
+            Player.TurnStart();
             Draw(5);
         }
         public void PlayerTurnEnd()
@@ -119,7 +130,8 @@ namespace SlayTheConsole.Scenes
         {
             foreach (var item in monsters)
             {
-                item.action[0].Action(item, game.player);
+                item.MonsterTurn();
+                item.action[turn % item.action.Length].Action(item, Player);
             }
             PlayerTurn();
         }
@@ -138,7 +150,7 @@ namespace SlayTheConsole.Scenes
                     input = Console.ReadKey().KeyChar - '0';
                 } while (input < 1 || input > monsters.Count);
             }
-            if (holdingSkill[n - 1].Action(monsters[0 + input - 1], game.player))
+            if (holdingSkill[n - 1].Action(monsters[0 + input - 1], Player))
             {
                 usedSkill.Add(holdingSkill[n - 1]);
                 holdingSkill.RemoveAt(n - 1);
