@@ -11,33 +11,46 @@
         public bool state { get; private set; }
         public MonsterSKill[] action { get; private set; }
 
-        string[] monstersName = { 
-            "가시 슬라임", 
+        string[] monstersName =
+        {
+            "가시 슬라임",
             "산성 슬라임",
             "턱벌레"
         };
-        int[] monstersHp = { 
+        int[] monstersHp =
+        {
             10,
             8,
             40
         };
-        int[] monstersSetDp = {
+        int[] monstersSetDp =
+        {
             0,
             0,
             5,
         };
-        int[] monstersAp = { 
+        int[] monstersAp =
+        {
             5,
             3,
             11,
         };
-        MonsterSKill[][] monstersAction = { 
-            new MonsterSKill[]{new MonsterAtack() }, 
+        MonsterSKill[][] monstersAction =
+        {
             new MonsterSKill[] { new MonsterAtack() },
-            new MonsterSKill[] { new MonsterAtack(), new MonsterDefend() } 
+            new MonsterSKill[] { new MonsterAtack() },
+            new MonsterSKill[] { new MonsterAtack(), new MonsterDefend() }
         };
 
-        public static Monsters GetMonster(int n)
+        public static List<Monsters> SetMonster(List<Monsters> monsters, int stage)
+        {
+            monsters.Add(GetMonster(0));
+            monsters.Add(GetMonster(1));
+            monsters.Add(GetMonster(2));
+            return monsters;
+        }
+
+        private static Monsters GetMonster(int n)
         {
             Monsters monster = new Monsters();
             monster.name = monster.monstersName[n];

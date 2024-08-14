@@ -11,20 +11,21 @@ namespace SlayTheConsole.Scenes
         List<Skill> usedSkill = new();
         Player Player = new();
         int turn;
+        int stage;
 
         public override void Enter()
         {
             Player = game.player;
-            //monsters.Add(Monsters.GetMonster(0));
-            //monsters.Add(Monsters.GetMonster(1));
-            monsters.Add(Monsters.GetMonster(2));
+            Monsters.SetMonster(monsters, stage);
             Random random = new Random();
             drawSkill = new Queue<Skill>(Player.skillList.OrderBy(x => random.Next()).ToList());
             turn = -1;
+            stage++;
             PlayerTurn();
         }
         public override void Render()
         {
+            Console.WriteLine($"{stage}스테이지");
             // 몬스터 정보 출력
             int[] setCursor = { 56, 36, 76 };
             for (int i = 0; i < monsters.Count; i++)
