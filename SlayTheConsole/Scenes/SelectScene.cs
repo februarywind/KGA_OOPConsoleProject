@@ -14,25 +14,12 @@
         {
             Console.SetCursorPosition(0, 10);
             Console.WriteLine($"{"보상을 선택하십시오",60}");
-            Console.WriteLine($"{"1. 능력치 상승",60}");
-            Console.WriteLine($"{"2. 새로운 스킬",60}");
+            Console.ReadKey();
         }
         public override void Input()
         {
-            int input = 0;
-            do
-            {
-                input = Console.ReadKey().KeyChar - '0';
-            }
-            while (input < 1 || input > 2);
-            if (input == 1)
-            {
-                UpStat();
-            }
-            else
-            {
-                AddSkill();
-            }
+            UpStat();
+            AddSkill();
         }
         public override void Update()
         {
@@ -75,9 +62,9 @@
             {
                 Console.Clear();
                 Console.SetCursorPosition(0, 10);
-                Console.WriteLine($"1. {Reward[0].name} 행동력 : {Reward[0].cost} {Reward[0].info}");
-                Console.WriteLine($"2. {Reward[1].name} 행동력 : {Reward[1].cost} {Reward[1].info}");
-                Console.WriteLine($"3. {Reward[2].name} 행동력 : {Reward[2].cost} {Reward[2].info}");
+                Console.WriteLine($"{$"1. {Reward[0].name} 행동력 : {Reward[0].cost} {Reward[0].info}", 70}");
+                Console.WriteLine($"{$"2. {Reward[1].name} 행동력 : {Reward[1].cost} {Reward[1].info}", 70}");
+                Console.WriteLine($"{$"3. {Reward[2].name} 행동력 : {Reward[2].cost} {Reward[2].info}", 70}");
                 int input = 0;
                 do
                 {
@@ -103,4 +90,5 @@
 
             }
         }
-    } }
+    }
+}

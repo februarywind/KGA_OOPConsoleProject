@@ -23,8 +23,8 @@
             stageMonster[5] = new Monsters[] { new JawWorm(), new JawWorm() };
             stageMonster[6] = new Monsters[] { new ShieldGremlin(), new WizardGremlin(), new SneakyGremlin(), };
             stageMonster[7] = new Monsters[] { new SlimeBoss() };
-            stageMonster[8] = new Monsters[] { new SlimeBoss(), new SlimeBoss() };
-            stageMonster[9] = new Monsters[] { new SlimeBoss(), new SlimeBoss(), new SlimeBoss() };
+            stageMonster[8] = new Monsters[] { new SlimeBoss() };
+            stageMonster[9] = new Monsters[] { new SlimeBoss() };
             foreach (var item in stageMonster[stage])
             {
                 monsters.Add(item);

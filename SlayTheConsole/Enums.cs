@@ -1,4 +1,4 @@
 ﻿namespace SlayTheConsole
 {
-    public enum SceneType { Title, Battle, Select, GameOver, Size, }
+    public enum SceneType { Title, Battle, Select, GameOver, GameClear, Size, }
 }

@@ -73,11 +73,12 @@ namespace SlayTheConsole.Scenes
                     return;
                 }
             } while (input < 1 || input > holdingSkill.Count);
+            input--;
 
             // 선택 스킬 정보출력
             Console.SetCursorPosition(0, 24);
-            Console.WriteLine($"{holdingSkill[input - 1].name,55}, 행동력 : {holdingSkill[input - 1].cost}");
-            Console.WriteLine($"{holdingSkill[input - 1].info,63}");
+            Console.WriteLine($"{holdingSkill[input].name,55}, 행동력 : {holdingSkill[input].cost}");
+            Console.WriteLine($"{holdingSkill[input].info,63}");
             Console.WriteLine($"{"스킬을 사용한다. y/n",63}");
             do
             {
@@ -103,6 +104,12 @@ namespace SlayTheConsole.Scenes
                 holdingSkill.Clear();
                 usedSkill.Clear();
                 game.ChangeScene(SceneType.GameOver);
+            }
+            if (monsters.Count == 0 && stage == 10)
+            {
+                holdingSkill.Clear();
+                usedSkill.Clear();
+                game.ChangeScene(SceneType.GameClear);
             }
         }
         public override void Exit() { }
@@ -148,7 +155,7 @@ namespace SlayTheConsole.Scenes
             int input = 1;
 
             Game.ClearLine(24, 3);
-            if (holdingSkill[n - 1].atackType)
+            if (holdingSkill[n].atackType)
             {
                 do
                 {
@@ -157,14 +164,17 @@ namespace SlayTheConsole.Scenes
                     input = Console.ReadKey().KeyChar - '0';
                 } while (input < 1 || input > monsters.Count);
             }
-            if (holdingSkill[n - 1].Action(monsters[0 + input - 1], Player))
+
+            input--;
+
+            if (holdingSkill[n].Action(monsters[0 + input], Player))
             {
-                usedSkill.Add(holdingSkill[n - 1]);
-                holdingSkill.RemoveAt(n - 1);
+                usedSkill.Add(holdingSkill[n]);
+                holdingSkill.RemoveAt(n);
             }
-            if (monsters[0 + input - 1].hp <= 0)
+            if (monsters[0 + input].hp <= 0)
             {
-                monsters.Remove(monsters[0 + input - 1]);
+                monsters.Remove(monsters[0 + input]);
             }
 
         }

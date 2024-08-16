@@ -51,6 +51,7 @@ namespace SlayTheConsole
             scenes[(int)SceneType.Battle] = new BattleScene(this);
             scenes[(int)SceneType.Select] = new SelectScene(this);
             scenes[(int)SceneType.GameOver] = new GameOverScenes(this);
+            scenes[(int)SceneType.GameClear] = new GameClear(this);
 
             curScene = scenes[(int)SceneType.Title];
             curScene.Enter();
