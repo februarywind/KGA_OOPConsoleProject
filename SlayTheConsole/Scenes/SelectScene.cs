@@ -3,7 +3,7 @@
     internal class SelectScene : Scene
     {
         public SelectScene(Game game) : base(game) { }
-        List<Skill> Reward = new List<Skill> { new BodySlam(), new HeavyBlade(), new IronWave() };
+        List<Skill> Reward = new List<Skill> { new BodySlam(), new HeavyBlade(), new IronWave(), new Flex() };
         public override void Enter()
         {
             Random random = new Random();
@@ -24,7 +24,7 @@
             {
                 input = Console.ReadKey().KeyChar - '0';
             }
-            while (input < 0 || input > 2);
+            while (input < 1 || input > 2);
             if (input == 1)
             {
                 UpStat();

@@ -113,4 +113,13 @@ namespace SlayTheConsole
             return true;
         }
     }
+    public class Flex : Skill
+    {
+        public Flex() : base("몸 풀기", "힘을 2 얻습니다. 턴이 끝날 때 힘을 2 잃습니다.", 0, false) { }
+        public override bool Action(Monsters monster, Player player)
+        {
+            player.SetTempAp(2);
+            return true;
+        }
+    }
 }

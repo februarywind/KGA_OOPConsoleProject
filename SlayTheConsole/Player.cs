@@ -5,6 +5,7 @@
         public int maxHp { get; private set; } = 80;
         public int hp { get; private set; } = 80;
         public int ap { get; private set; } = 0;
+        public int tempAp { get; private set; } = 0;
         public int dp { get; private set; } = 0;
         public int upDp { get; private set; } = 0;
         public int maxMp { get; private set; } = 3;
@@ -26,6 +27,11 @@
             }
             hp -= damage;
         }
+        public void SetTempAp(int value)
+        {
+            tempAp += value;
+            ap += value;
+        }
 
         public void SetDp(int value)
         {
@@ -40,6 +46,11 @@
         {
             dp = 0;
             mp = maxMp;
+            if (tempAp != 0)
+            {
+                ap -= tempAp;
+                tempAp = 0;
+            }
         }
 
         public void UpStat(int[] ints)

@@ -35,7 +35,7 @@ namespace SlayTheConsole.Scenes
                 Console.SetCursorPosition(setCursor[i], 6);
                 Console.WriteLine($"체력 : {monsters[i].hp}/{monsters[i].maxHp} + {monsters[i].dp}");
                 Console.SetCursorPosition(setCursor[i], 7);
-                Console.WriteLine($"행동: {monsters[i].action[turn % monsters[i].action.Length].name} {((monsters[i].action[turn % monsters[i].action.Length].name == "공격") ? monsters[i].ap : monsters[i].setDp)}");
+                Console.WriteLine($"행동: {monsters[i].action[turn % monsters[i].action.Length].name} {monsters[i].action[turn % monsters[i].action.Length].value}");
                 Console.SetCursorPosition(setCursor[i], 8);
                 Console.WriteLine($"상태: {(monsters[i].state ? "취약":"기본")}");
             }
@@ -97,6 +97,12 @@ namespace SlayTheConsole.Scenes
                 holdingSkill.Clear();
                 usedSkill.Clear();
                 game.ChangeScene(SceneType.Select);
+            }
+            if (Player.hp <= 0)
+            {
+                holdingSkill.Clear();
+                usedSkill.Clear();
+                game.ChangeScene(SceneType.GameOver);
             }
         }
         public override void Exit() { }
